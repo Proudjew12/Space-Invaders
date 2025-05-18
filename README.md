@@ -12,4 +12,4 @@ Increasing difficulty to test your reflexes
 
 Built as a side project to explore core game dev concepts
 
-🔗 Play Now on GitHub Pages
+🔗 Play Now on GitHub Pages : https://proudjew12.github.io/Space-Invaders/
