@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Invaders</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body onload="onInit()" onkeydown="onKeyDown(event)">
+
+    <div class="title-container">
+        <h1>Space Invaders </h1>
+    </div>
+    <div class="points-container">
+        <h1>Points: </h1>
+    </div>
+    <div class="table-container">
+        <table>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="winMessage hide">
+        <h2>Victory!</h2>
+        <p>Congratulations! You've Saved The Planet!</p>
+        <button class="winButton" onclick="restartGame(this)">Restart Game</button>
+    </div>
+
+    <script src="js/game.js"></script>
+    <script src="js/dom.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/hero.js"></script>
+    <script src="js/enemy.js"></script>
+    <script src="js/utils.js"></script>
+</body>
+
+</html>
