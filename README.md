@@ -1,2 +1,15 @@
-# Space-Invaders
-Space Invaders is a fun remake of the classic arcade shooter. Control a cannon, blast waves of aliens, and dodge their attacks. Features smooth controls, pixel-art style, and increasing difficulty. Built as a side project to explore game development and relive retro gaming vibes.
+🚀 Space Invaders
+Space Invaders is a modern remake of the legendary arcade shooter — crafted with love for retro gaming and clean, responsive design.
+
+🎮 Control a cannon, blast waves of invading aliens, and dodge their deadly fire. Each level ramps up the challenge with smarter enemies and faster gameplay.
+
+🔹 Features
+Classic pixel-art style for authentic retro vibes
+
+Smooth keyboard controls and fluid animations
+
+Increasing difficulty to test your reflexes
+
+Built as a side project to explore core game dev concepts
+
+🔗 Play Now on GitHub Pages
