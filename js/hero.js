@@ -1,8 +1,11 @@
 'use strict'
 
+
 const HERO = '🤡'
 const LASER = '🎇'
 const LASER_SPEED = 80
+
+var gPoints = 0
 
 var gHero = { pos: { i: 12, j: 7 }, isShoot: false }
 var gHeroElements
@@ -43,6 +46,7 @@ function moveHero(dir) {
     updateCell(gHero.pos, gHeroElements)
 }
 function shoot() {
+
     if (gHero.isShoot) return
     gHero.isShoot = true
 
@@ -61,14 +65,17 @@ function shoot() {
             clearInterval(gIntervalShoot)
             gHero.isShoot = false
             gGame.alienCount--
+            gPoints += ALIEN_NORMAL_POINTS
+
+            const elPoints = document.querySelector('.points-container h1')
+            elPoints.innerHTML = `Points: <span>${gPoints}</span>`
+
             checkWinning()
             return
         }
         blinkLaser({ i, j })
         i--
     }, LASER_SPEED);
-
-
 }
 function blinkLaser(pos) {
 
@@ -76,5 +83,4 @@ function blinkLaser(pos) {
     setTimeout(() => {
         updateCell(pos, null)
     }, LASER_SPEED);
-
 } 
