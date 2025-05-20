@@ -1,79 +1,98 @@
 'use strict'
 
-var gAliens = {
-    topRow: 6,
-    bottomRow: 6,
-    leftCol: 6,
-    rightCol: 8,
-    direction: 'right',
-}
-
+const ALIEN_SPEED = 500
 var gIntervalAliens
-var gIsAlienFreeze = false
 
 
-function shiftBoardLeft() {
-    for (let i = gAliens.topRow; i <= gAliens.bottomRow; i++) {
-        for (let j = gAliens.leftCol; j <= gAliens.rightCol; j++) {
-            gBoard[i][j].gameObject = gBoard[i][j + 1].gameObject
+var gAliensTopRowIdx
+var gAliensBottomRowIdx
+var gAliensLeftColIdx
+var gAliensRightColIdx
+
+var gIsAliensFreeze = false
+var gAliensDirection = 'right'
+
+
+function shiftBoardRight(board) {
+
+
+    for (let i = gAliensTopRowIdx; i <= gAliensBottomRowIdx; i++) {
+        for (let j = gAliensRightColIdx; j >= gAliensLeftColIdx; j--) {
+            if (board[i][j].gameObject && board[i][j].gameObject.icon === ALIEN) {
+                board[i][j + 1].gameObject = board[i][j].gameObject
+                board[i][j].gameObject = null
+            }
         }
-        gBoard[i][gAliens.rightCol].gameObject = null
+
     }
-    gAliens.leftCol--
-    gAliens.rightCol--
+    gAliensLeftColIdx++
+    gAliensRightColIdx++
 }
-function shiftBoardRight() {
-    for (let i = gAliens.topRow; i <= gAliens.bottomRow; i++) {
-        for (let j = gAliens.rightCol; j >= gAliens.leftCol; j--) {
-            gBoard[i][j].gameObject = gBoard[i][j - 1].gameObject
-        }
-        gBoard[i][gAliens.leftCol].gameObject = null
-    }
-    gAliens.leftCol++
-    gAliens.rightCol++
-}
-function shiftBoardDown() {
-    for (let i = gAliens.bottomRow; i > gAliens.topRow; i--) {
-        for (let j = gAliens.leftCol; j <= gAliens.rightCol; j++) {
-            gBoard[i][j].gameObject = gBoard[i - 1][j].gameObject
-        }
-    }
-    for (let j = gAliens.leftCol; j < gAliens.rightCol; j++) {
-        gBoard[gAliens.topRow][j].gameObject = null
-    }
-    gAliens.topRow++
-    gAliens.bottomRow++
-}
+function shiftBoardLeft(board) {
 
 
+    for (let i = gAliensTopRowIdx; i <= gAliensBottomRowIdx; i++) {
+        for (let j = gAliensLeftColIdx; j <= gAliensRightColIdx; j++) {
+            if (board[i][j].gameObject && board[i][j].gameObject.icon === ALIEN) {
+                board[i][j - 1].gameObject = board[i][j].gameObject
+                board[i][j].gameObject = null
+            }
+        }
+
+    }
+    gAliensLeftColIdx--
+    gAliensRightColIdx--
+}
+function shiftBoardDown(board) {
+
+    for (let i = gAliensBottomRowIdx; i >= gAliensTopRowIdx; i--) {
+        for (let j = gAliensLeftColIdx; j <= gAliensRightColIdx; j++) {
+            board[i + 1][j].gameObject = board[i][j].gameObject
+        }
+    }
+    for (let j = gAliensLeftColIdx; j <= gAliensRightColIdx; j++) {
+        board[gAliensTopRowIdx][j].gameObject = null
+    }
+    gAliensTopRowIdx++
+    gAliensBottomRowIdx++
+}
 
 function moveAliens() {
-    if (gIsAlienFreeze) return
+    if (gIsAliensFreeze) return
 
-    if (gAliens.direction === 'right') {
-        if (gAliens.rightCol < gBoard[0].length - 1) {
-            shiftBoardRight()
+    if (gGame.alienCount === 0) {
+        stopAliens()
+        return
+    }
+
+    if (gAliensDirection === 'right') {
+        if (gAliensRightColIdx < gBoard[0].length - 1) {
+            shiftBoardRight(gBoard)
         } else {
-            shiftBoardDown()
-            gAliens.direction = 'left'
+            shiftBoardDown(gBoard)
+            gAliensDirection = 'left'
         }
     } else {
-        if (gAliens.leftCol > 0) {
-            shiftBoardLeft()
+        if (gAliensLeftColIdx > 0) {
+            shiftBoardLeft(gBoard)
         } else {
-            shiftBoardDown()
-            gAliens.direction = 'right'
+            shiftBoardDown(gBoard)
+            gAliensDirection = 'right'
         }
     }
     renderBoard(gBoard)
-
-    if (gAliens.bottomRow >= gHero.pos.i - 2) stopAliens()
+    if (gAliensBottomRowIdx >= gHero.pos.i - 1) stopAliens()
+    checkGameOver()
 }
 
+
 function startAliens() {
-    gIntervalAliens = setInterval(() => {
-        moveAliens()
-    }, ALIEN_SPEED);
+    if (!gGame.isOn) return
+    else {
+        clearInterval(gIntervalAliens)
+        gIntervalAliens = setInterval(moveAliens, ALIEN_SPEED)
+    }
+
 }
 function stopAliens() {
     clearInterval(gIntervalAliens)

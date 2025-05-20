@@ -28,6 +28,20 @@
         <p>Congratulations! You've Saved The Planet!</p>
         <button class="winButton" onclick="restartGame(this)">Restart Game</button>
     </div>
+    <div class="gameOver hide">
+        <h2>Mission Failed!</h2>
+        <p>The aliens have conquered Earth... Humanity is doomed.</p>
+        <button class="LoseButton" onclick="restartGame(this)">Restart Game</button>
+    </div>
+    <div class="menu">
+        <h2>👾 Space Defender 👾</h2>
+        <p class="instructions">
+            Use <span class="key">←</span> and <span class="key">→</span> to move<br>
+            Press <span class="key">Space</span> to fire
+        </p>
+
+        <button class="startButton" onclick="onStartGame(this)">Start Game</button>
+    </div>
 
     <script src="js/game.js"></script>
     <script src="js/dom.js"></script>
