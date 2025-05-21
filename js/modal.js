@@ -24,6 +24,15 @@ function checkWinning() {
 function checkGameOver() {
     if (gAliensBottomRowIdx >= gHero.pos.i - 1) {
         gGame.isOn = false
+        stopAlienAttacks()
+        var elLose = document.querySelector('.gameOver')
+        elLose.classList.remove('hide')
+        elLose.classList.add('unHide')
+    }
+    if (HERO === null) {
+        gGame.isOn = false
+        stopAlienAttacks()
+        stopAliens()
         var elLose = document.querySelector('.gameOver')
         elLose.classList.remove('hide')
         elLose.classList.add('unHide')
@@ -37,7 +46,7 @@ function restartGame() {
     elPoints.innerHTML = `Points: ${gPoints}`
 
     gHero.pos = { i: 12, j: 7 }
-    gGame.isOn = true
+    HERO = '🤡'
 
     var elWin = document.querySelector('.winMessage')
     elWin.classList.remove('unHide')
@@ -46,8 +55,12 @@ function restartGame() {
     elLose.classList.remove('unHide')
     elLose.classList.add('hide')
 
+    gGame.isOn = true
+    startAlienAttacks()
     onInit()
+
 }
+
 function onStartGame() {
 
     gGame.isOn = true
@@ -64,8 +77,11 @@ function onStartGame() {
     elMenu.classList.remove('unHideFlex')
     elMenu.classList.add('hide')
 
-}
 
+    startAlienAttacks()
+    startAliens()
+
+}
 
 
 

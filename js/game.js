@@ -6,7 +6,6 @@ var gGame = {
 }
 
 function onInit() {
-    gGame.isOn = false
     createBoard()
 
     createHero(gBoard)

@@ -1,9 +1,9 @@
 'use strict'
 
 
-const HERO = '🤡'
+var HERO = '🤡'
 const LASER = '🎇'
-const LASER_SPEED = 80
+const LASER_SPEED = 200
 
 var gPoints = 0
 
