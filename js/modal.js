@@ -41,9 +41,24 @@ function checkGameOver() {
 function restartGame() {
 
     gPoints = 0
+    gLives = 3
+    gSuperAttack = 3
+    gExplosion = 3
+
+    stopAlienAttacks()
+
+    const elExploration = document.querySelector('.exploration-container h1')
+    elExploration.innerHTML = `Exploration: ${gExplosion}`
+
+    const elSuperAttack = document.querySelector('.superAttack-container h1')
+    elSuperAttack.innerHTML = `SuperAttack: <span>${gLives}</span>`
+
+    const elLives = document.querySelector('.lives-container h1')
+    elLives.innerHTML = `Lives: <span>${gLives}</span>`
 
     const elPoints = document.querySelector('.points-container h1')
     elPoints.innerHTML = `Points: ${gPoints}`
+
 
     gHero.pos = { i: 12, j: 7 }
     HERO = '🤡'
@@ -65,9 +80,26 @@ function onStartGame() {
 
     gGame.isOn = true
 
-    var elTable = document.querySelector('.points-container')
-    elTable.classList.add('unHide')
-    elTable.classList.remove('hide')
+    var elPoints = document.querySelector('.points-container')
+    elPoints.classList.add('unHide')
+    elPoints.classList.remove('hide')
+
+    var elLives = document.querySelector('.lives-container')
+    elLives.classList.add('unHide')
+    elLives.classList.remove('hide')
+
+    var elSuperAttack = document.querySelector('.superAttack-container')
+    elSuperAttack.classList.add('unHide')
+    elSuperAttack.classList.remove('hide')
+
+    var elSuperAttack = document.querySelector('.exploration-container')
+    elSuperAttack.classList.add('unHide')
+    elSuperAttack.classList.remove('hide')
+
+    var elReset = document.querySelector('.fixglitch-container')
+    elReset.classList.add('unHide')
+    elReset.classList.remove('hide')
+
 
     var elPoints = document.querySelector('.table-container')
     elPoints.classList.add('unHideFlex')

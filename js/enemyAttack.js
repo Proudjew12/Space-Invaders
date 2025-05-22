@@ -44,10 +44,15 @@ function alienShoot() {
         if (cellObj && cellObj.icon === HERO) {
             clearInterval(alienLaserInterval)
             updateCell({ i, j }, null)
-            HERO = null
-            stopAlienAttacks()
-            checkGameOver()
-            return
+            gLives--
+            const elLives = document.querySelector('.lives-container h1')
+            elLives.innerHTML = `Lives: <span>${gLives}</span>`
+            if (gLives === 0) {
+                HERO = null
+                stopAlienAttacks()
+                checkGameOver()
+                return
+            }
         }
 
         if (cellObj && cellObj.icon === ALIEN) {

@@ -14,8 +14,20 @@
     <div class="title-container">
         <h1>🚀 Space Invaders 🚀</h1>
     </div>
+    <div class="fixglitch-container">
+        <button class="fixGlitch" onclick="restartGame(this)">ResetToFixGlitch</button>
+    </div>
     <div class="points-container">
         <h1>Points: <span>0</span></h1>
+    </div>
+    <div class="lives-container">
+        <h1>Lives: <span>3</span></h1>
+    </div>
+    <div class="superAttack-container">
+        <h1>SuperAttack: <span>3</span></h1>
+    </div>
+    <div class="exploration-container">
+        <h1>Exploration: <span>3</span></h1>
     </div>
     <div class="table-container">
         <table>
@@ -37,7 +49,8 @@
         <h2>👾 Space Defender 👾</h2>
         <p class="instructions">
             Use <span class="key">←</span> and <span class="key">→</span> to move<br>
-            Press <span class="key">Space</span> to fire
+            Press <span class="key">Space</span> to fire <span class="key">S</span> for SuperAttack <span
+                class="key">X</span> for Exploration
         </p>
 
         <button class="startButton" onclick="onStartGame(this)">Start Game</button>

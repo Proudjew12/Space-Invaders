@@ -21,6 +21,7 @@ body {
 
 .points-container {
     display: none;
+
 }
 
 .points-container h1 {
@@ -33,6 +34,64 @@ body {
 }
 
 .points-container span {
+    color: rgb(24, 132, 65);
+}
+
+.lives-container {
+    display: none;
+
+}
+
+.lives-container h1 {
+
+    font-family: 'Press Start 2P', monospace;
+    color: #ff0;
+    font-size: 2rem;
+    text-align: left;
+    text-shadow: 1px 1px #000;
+}
+
+.lives-container span {
+    color: rgb(24, 132, 65);
+}
+
+.superAttack-container {
+    display: none;
+    position: absolute;
+    top: 50%;
+}
+
+.superAttack-container h1 {
+
+    font-family: 'Press Start 2P', monospace;
+    color: #ff0;
+    font-size: 2rem;
+    text-align: left;
+    text-shadow: 1px 1px #000;
+}
+
+.superAttack-container span {
+    color: rgb(24, 132, 65);
+}
+
+
+
+.exploration-container {
+    display: none;
+    position: absolute;
+    top: 55%;
+}
+
+.exploration-container h1 {
+
+    font-family: 'Press Start 2P', monospace;
+    color: #ff0;
+    font-size: 2rem;
+    text-align: left;
+    text-shadow: 1px 1px #000;
+}
+
+.exploration-container span {
     color: rgb(24, 132, 65);
 }
 
@@ -211,6 +270,37 @@ body {
     transform: scale(0.97);
 }
 
+.fixglitch-container {
+    text-align: center;
+    margin: 20px 0;
+    position: absolute;
+    display: none;
+    right: 70%;
+}
+
+.fixGlitch {
+
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-family: 'Press Start 2P', monospace;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.fixGlitch:hover {
+    background-color: #e64a19;
+    transform: scale(1.05);
+}
+
+.fixGlitch:active {
+    background-color: #d84315;
+    transform: scale(0.95);
+}
 
 .hide {
     display: none;

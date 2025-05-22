@@ -2,10 +2,13 @@
 
 
 var HERO = '🤡'
-const LASER = '🎇'
-const LASER_SPEED = 200
+var LASER = '🎇'
+let LASER_SPEED = 100
 
+var gLives = 3
 var gPoints = 0
+var gSuperAttack = 3
+var gExplosion = 3
 
 var gHero = { pos: { i: 12, j: 7 }, isShoot: false }
 var gHeroElements
@@ -20,6 +23,7 @@ function createHero(board) {
     }
     board[gHero.pos.i][gHero.pos.j].gameObject = gHeroElements
 
+
 }
 function onKeyDown(ev) {
     switch (ev.key) {
@@ -33,6 +37,12 @@ function onKeyDown(ev) {
         case 'Space':
         case 'Spacebar':
             shoot()
+            break
+        case 's':
+            superAttack()
+            break
+        case 'x':
+            explosion()
             break
     }
 }
@@ -57,6 +67,7 @@ function shoot() {
         if (i < 0) {
             clearInterval(gIntervalShoot)
             gHero.isShoot = false
+
             return
         }
         const cellObj = gBoard[i][j].gameObject
@@ -81,6 +92,90 @@ function blinkLaser(pos) {
 
     updateCell(pos, { icon: LASER })
     setTimeout(() => {
-        updateCell(pos, null)
+        if (gBoard[pos.i][pos.j].gameObject.icon === LASER) {
+            updateCell(pos, null)
+        }
     }, LASER_SPEED);
-} 
+}
+function superAttack() {
+    if (gSuperAttack === 0) return
+
+    gSuperAttack--
+    const elSuperAttack = document.querySelector('.superAttack-container h1')
+    elSuperAttack.innerHTML = `SuperAttack: <span>${gSuperAttack}</span>`
+
+    var baseSpeed = LASER_SPEED
+    var baseIcon = LASER
+
+    LASER_SPEED = 10
+    LASER = '⭐'
+
+
+
+    shoot()
+
+    setTimeout(() => {
+        LASER = baseIcon
+        LASER_SPEED = baseSpeed
+    }, 10 * gHero.pos.i);
+
+
+}
+
+function explosion() {
+    if (gExplosion === 0) return
+
+    gExplosion--
+    const elExploration = document.querySelector('.exploration-container h1')
+    elExploration.innerHTML = `Exploration: <span>${gExplosion}</span>`
+
+    let i = gHero.pos.i - 1
+    let j = gHero.pos.j
+
+    gHero.isShoot = true
+
+    var baseIcon = LASER
+    LASER = '💣'
+
+    gIntervalShoot = setInterval(() => {
+        if (i < 0) {
+            clearInterval(gIntervalShoot)
+            gHero.isShoot = false
+            LASER = baseIcon
+            return
+        }
+        let cellObj = gBoard[i][j].gameObject
+        if (cellObj && cellObj.icon === ALIEN) {
+            explodeArea(i, j)
+            updateCell({ i, j }, null)
+            clearInterval(gIntervalShoot)
+            gHero.isShoot = false
+
+            const elPoints = document.querySelector('.points-container h1')
+            elPoints.innerHTML = `Points: <span>${gPoints}</span>`
+
+            checkWinning()
+            LASER = baseIcon
+            return
+        }
+        blinkLaser({ i, j })
+        i--
+    }, 200);
+}
+
+function explodeArea(rowIdx, colIdx) {
+    for (let i = rowIdx - 1; i <= rowIdx + 1; i++) {
+        if (i < 0 || i >= gBoard.length) continue
+        for (let j = colIdx - 1; j <= colIdx + 1; j++) {
+            if (j < 0 || j >= gBoard[i].length) continue
+
+            let cell = gBoard[i][j].gameObject
+            if (!cell) continue
+            if (cell.icon !== ALIEN) continue
+
+            updateCell({ i, j }, null)
+            gGame.alienCount--
+            gPoints += ALIEN_NORMAL_POINTS
+        }
+    }
+}
