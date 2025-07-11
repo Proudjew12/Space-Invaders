@@ -1,5 +1,4 @@
-🚀 Space Invaders
-Space Invaders is a modern remake of the legendary arcade shooter — crafted with love for retro gaming and clean, responsive design.
+🚀 Space Invaders is a modern remake of the legendary arcade shooter — crafted with love for retro gaming and clean, responsive design.
 
 🎮 Control a cannon, blast waves of invading aliens, and dodge their deadly fire. Each level ramps up the challenge with smarter enemies and faster gameplay.
 
