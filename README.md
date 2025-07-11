@@ -2,7 +2,7 @@
 
 🎮 Control a cannon, blast waves of invading aliens, and dodge their deadly fire. Each level ramps up the challenge with smarter enemies and faster gameplay.
 
-🔹 Features
+🔹 Features :
 Classic pixel-art style for authentic retro vibes
 
 Smooth keyboard controls and fluid animations
